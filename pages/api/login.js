@@ -1,7 +1,7 @@
 // api folder ---> Welcome to the server-side world
 import { login } from "../../lib/users";
 // Request Handler Function
-export default (req, res) => {
+export default async (req, res) => {
 
   if (req.method !== "POST") {
     res.status(405).json({
@@ -11,6 +11,6 @@ export default (req, res) => {
     return;
   }
   const { username, password } = JSON.parse(req.body);
-
-  res.status(200).json(login(username, password));
+  const response = await  login(username, password);
+  return res.status(200).json(response);
 };
